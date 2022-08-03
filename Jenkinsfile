@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo "${env.BUILD_NUMBER}"
+                echo 'Testing..'
                 echo "${env.BUILD_URL}"
             }
         }
@@ -17,7 +17,7 @@ pipeline {
         Stage('proceed to Deploy'){
             steps{
                 script{
-                if (env.BRANCH_NAME == "master") {
+                if {env.BRANCH_NAME == "master"} {
                         input ('proceed for prod deployment?')
                        
                 }
@@ -27,11 +27,6 @@ pipeline {
             steps {
                 echo 'Deploying....'
             }
-            post {
-                failure{
-                    echo 'sending notification'
-                }
-            } 
 
 
         }
@@ -40,7 +35,7 @@ pipeline {
     post {
          always {
             echo 'One way or another, I have finished'
-            deleteDir() /* clean up our workspace */
+            
          }
          success {
             echo 'I succeeded!'
