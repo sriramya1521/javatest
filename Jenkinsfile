@@ -17,8 +17,8 @@ pipeline {
         stage('proceed to Deploy'){
             steps {
                 script {
-                    if { env.BRANCH_NAME == "master"}{
-                        input 'proceed for Deployment?'
+                    if (env.BRANCH_NAME == "master") {
+                        input('proceed for Deployment?')
                     }
                 }
             }
