@@ -10,6 +10,17 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                echo "${env.BUILD_URL}"
+            }
+        }
+
+        stage('proceed to Deploy'){
+            steps {
+                script {
+                    if { env.BRANCH_NAME == "master"}{
+                        input 'proceed for Deployment?'
+                    }
+                }
             }
         }
         stage('Deploy') {
